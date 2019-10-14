@@ -14,12 +14,6 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 pp = pprint.PrettyPrinter(indent=4)
 
-def normalize(img):
-    img = np.array(img)
-    mean = 129.88072497323765
-    std = 62.47280975739285
-    return (img - mean) / std
-
 def go(args):
     drop_rate = args[0]
     # rotation_range = int(args[0]*30)
@@ -133,9 +127,9 @@ def go(args):
 #          hp.uniform('shear_range', 0.0, 0.1),
 #          hp.uniform('zoom_range', 0.0, 0.1),
 #          hp.randint('fill_mode', 4)]
-# space = [hp.uniform('drop_rate', 0.1, 0.3)]
+space = [hp.uniform('drop_rate', 0.1, 0.3)]
 
-# best = fmin(go, space, algo=tpe.suggest, max_evals=10)
-# print(best)
+best = fmin(go, space, algo=tpe.suggest, max_evals=10)
+print(best)
 
-loss = go([0.2])
+# loss = go([0.2])
