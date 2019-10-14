@@ -1,0 +1,6 @@
+__pycache__/*
+dataset/*
+2019*
+good*
+*.zip
+*.h5
