@@ -97,14 +97,6 @@ def go(args):
     return min(history.history['val_loss'])
 
 
-# space = [hp.uniform('rotation_range', 0.0, 0.1),
-#          hp.uniform('width_shift_range', 0.0, 0.1),
-#          hp.uniform('height_shift_range', 0.0, 0.1),
-#          hp.uniform('shear_range', 0.0, 0.1),
-#          hp.uniform('zoom_range', 0.0, 0.1),
-#          hp.randint('fill_mode', 4)]
-# space = [hp.uniform('drop_rate', 0.1, 0.3)]
 
 loss = go([0.25])
-# best = fmin(go, space, algo=tpe.suggest, max_evals=10)
-# print(best)
+# print(loss)
