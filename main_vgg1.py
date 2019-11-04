@@ -42,7 +42,7 @@ def go(args):
         validation_split=0.1)
 
     train_generator = train_datagen.flow_from_directory(os.path.join(DATASET_PATH, 'train'),
-                                                        target_size=(256, 256),
+                                                        target_size=(200, 200),
                                                         interpolation='bicubic',
                                                         class_mode='categorical',
                                                         shuffle=True,
@@ -51,14 +51,14 @@ def go(args):
 
     validation_generator = train_datagen.flow_from_directory(os.path.join(DATASET_PATH, 'train'),
                                                              target_size=(
-                                                                 256, 256),
+                                                                 200, 200),
                                                              interpolation='bicubic',
                                                              class_mode='categorical',
                                                              batch_size=BATCH_SIZE,
                                                              subset='validation')  # set as validation data
 
     net = VGG16(include_top=False, weights='imagenet', input_tensor=None,
-                input_shape=(256, 256, 3))
+                input_shape=(200, 200, 3))
     x = net.output
     x = Flatten()(x)
     x = Dropout(drop_rate)(x)
@@ -97,14 +97,6 @@ def go(args):
     return min(history.history['val_loss'])
 
 
-# space = [hp.uniform('rotation_range', 0.0, 0.1),
-#          hp.uniform('width_shift_range', 0.0, 0.1),
-#          hp.uniform('height_shift_range', 0.0, 0.1),
-#          hp.uniform('shear_range', 0.0, 0.1),
-#          hp.uniform('zoom_range', 0.0, 0.1),
-#          hp.randint('fill_mode', 4)]
-# space = [hp.uniform('drop_rate', 0.1, 0.3)]
 
 loss = go([0.25])
-# best = fmin(go, space, algo=tpe.suggest, max_evals=10)
-# print(best)
+# print(loss)
